@@ -1,4 +1,4 @@
-package com.company;
+package miscallaneous;
 
 import org.omg.CORBA.UserException;
 

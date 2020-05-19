@@ -1,4 +1,4 @@
-package com.company;
+package miscallaneous;
 
 public class ConvertBinaryTreeToDLL {
     public static TreeNode root;

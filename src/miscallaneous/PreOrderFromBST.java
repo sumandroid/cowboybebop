@@ -1,4 +1,4 @@
-package com.company;
+package miscallaneous;
 
 import java.util.ArrayList;
 import java.util.Arrays;

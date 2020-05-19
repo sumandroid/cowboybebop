@@ -1,7 +1,4 @@
-package com.company;
-
-import java.util.List;
-import java.util.Map;
+package miscallaneous;
 
 //Bellman ford algo fails where there is a negative weight cycle
 //It is based on dynamic programming
