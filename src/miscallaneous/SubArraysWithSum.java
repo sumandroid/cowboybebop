@@ -1,7 +1,8 @@
 package miscallaneous;
 
-import java.util.HashMap;
-import java.util.Map;
+import leetCodeTopInterview.medium.ExpressionTree;
+
+import java.util.*;
 
 public class SubArraysWithSum {
 
@@ -32,5 +33,62 @@ public class SubArraysWithSum {
             }
         }
         return res;
+    }
+
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        LinkedHashMap<Integer, List<Integer>> map = new LinkedHashMap<>();
+        HashMap<TreeNode, Integer> nodeToLevelMap = new HashMap<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        populateNodeToLevelMap(nodeToLevelMap, 0, root);
+        queue.add(root);
+        map.put(0, Arrays.asList(0));
+
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; i++){
+                TreeNode node = queue.poll();
+                if(node.left != null){
+                    if(!map.containsKey(nodeToLevelMap.get(node.left))){
+                        map.put(nodeToLevelMap.get(node.left), new ArrayList<>());
+                    }
+                    map.get(nodeToLevelMap.get(node.left)).add(node.left.val);
+                    queue.add(node.left);
+                }
+                if(node.right != null){
+                    if(!map.containsKey(nodeToLevelMap.get(node.right))){
+                        map.put(nodeToLevelMap.get(node.right), new ArrayList<>());
+                    }
+                    map.get(nodeToLevelMap.get(node.right)).add(node.right.val);
+                    queue.add(node.right);
+                }
+
+            }
+        }
+
+        for(Integer key : map.keySet()){
+            res.add(map.get(key));
+        }
+        return res;
+    }
+
+    private void populateNodeToLevelMap(HashMap<TreeNode, Integer> map, int level, TreeNode root){
+        if(root == null){
+            return;
+        }
+        map.put(root, level);
+        populateNodeToLevelMap(map, level - 1, root.left);
+        populateNodeToLevelMap(map, level + 1, root.right);
+    }
+
+    private  class TreeNode {
+        private Integer val;
+        private TreeNode left;
+        private TreeNode right;
+
+        public TreeNode(Integer val) {
+            this.val = val;
+        }
     }
 }
